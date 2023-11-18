@@ -52,7 +52,7 @@ module Worldize
     end
     
     def airport_names
-      @airports.map{|a| c.properties.name}
+      @airports.map{|a| a.properties.name}
     end
 
     # NB: syntax draw(countries = {}, **options) causes segfault in Ruby 2.2.0
@@ -127,7 +127,7 @@ module Worldize
     
     def parse_airport(airport)
       airport.point =
-        country.geometry.coordinates.
+        airport.geometry.coordinates.
           derp{|points|
             airport.geometry.type == 'Point' ? points.flatten(1) : points
           }.map(&:reverse) # GeoJSON has other approach to lat/lng ordering

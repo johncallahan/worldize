@@ -74,7 +74,7 @@ module Worldize
         gc.fill(options.fetch(:land))
       end
       
-      puts @airports["IAD"]
+      puts @airports[20]
 
       gc.draw(img)
 

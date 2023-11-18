@@ -20,6 +20,7 @@ module Worldize
     }
 
     DATA_PATH = File.expand_path('../../data/countries.geojson', __FILE__)
+    AIR_PATH = File.expand_path('../../data/airports.geojson', __FILE__)
 
     using Refinements
 
@@ -30,19 +31,32 @@ module Worldize
         features.map{|country|
           parse_country(country)
         }
+      @airports = File.read(AIR_PATH).
+        derp{|json| JSON.parse(json)}.
+        derp{|hash| Hashie::Mash.new(hash)}.
+        features.map{|airport|
+          parse_airport(airport)
+        }
     end
 
     def country_codes
       @countries.map{|c| c.properties.iso_a3}
     end
+    
+    def airport_codes
+      @airports.map{|a| a.properties.iata_code}
 
     def country_names
       @countries.map{|c| c.properties.name}
     end
+    
+    def airport_names
+      @airports.map{|a| c.properties.name}
+    end
 
     # NB: syntax draw(countries = {}, **options) causes segfault in Ruby 2.2.0
-    def draw(countries_and_options = {})
-      options = DEFAULT_OPTIONS.merge(countries_and_options)
+    def draw(countries_airports_and_options = {})
+      options = DEFAULT_OPTIONS.merge(countries_airports_and_options)
       width = options.fetch(:width)
       
       img = Image.new(width, width) { |opts| opts.background_color = options.fetch(:ocean) }
@@ -52,11 +66,15 @@ module Worldize
         fill(options.fetch(:land))
 
       @countries.each do |country|
-        bg = countries_and_options[country.properties.name] ||
-              countries_and_options[country.properties.iso_a3] ||
+        bg = countries_airports_and_options[country.properties.name] ||
+              countries_airports_and_options[country.properties.iso_a3] ||
               options.fetch(:land)
         draw_country(gc, country, width, bg)
         gc.fill(options.fetch(:land))
+      end
+      
+      countries_airports_and_options.each do |airport|
+        puts @airports[airport]
       end
 
       gc.draw(img)
@@ -105,6 +123,16 @@ module Worldize
 
       country
     end
+    
+    def parse_airport(airport)
+      airport.point =
+        country.geometry.coordinates.
+          derp{|points|
+            airport.geometry.type == 'Point' ? points.flatten(1) : points
+          }.map(&:reverse) # GeoJSON has other approach to lat/lng ordering
+
+      airport
+    end
 
     def draw_country(gc, country, width, bg)
       gc.fill(bg)
@@ -115,6 +143,12 @@ module Worldize
           
         gc.polygon(*polygon.flatten)
       end
+    end
+    
+    def draw_airport(gc, airport, width, bg)
+      gc.fill(bg)
+
+      puts airport
     end
   end
 end

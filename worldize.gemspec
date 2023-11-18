@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name     = 'worldize'
-  s.version  = '0.0.8'
+  s.version  = '0.0.9'
   s.authors  = ['Victor Shepelev']
   s.email    = 'zverok.offline@gmail.com'
   s.homepage = 'https://github.com/zverok/worldize'

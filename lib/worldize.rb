@@ -20,7 +20,7 @@ module Worldize
     }
 
     DATA_PATH = File.expand_path('../../data/countries.geojson', __FILE__)
-    AIR_PATH = File.expand_path('../../data/airports.json', __FILE__)
+    AIR_PATH = File.expand_path('../../data/airports.geojson', __FILE__)
 
     using Refinements
 
@@ -44,7 +44,7 @@ module Worldize
     end
     
     def airport_codes
-      @airports.map{|a| a.code}
+      @airports.map{|a| a.properties.iata_code}
     end
 
     def country_names
@@ -52,7 +52,7 @@ module Worldize
     end
     
     def airport_names
-      @airports.map{|a| a.name}
+      @airports.map{|a| a.properties.name}
     end
 
     # NB: syntax draw(countries = {}, **options) causes segfault in Ruby 2.2.0
@@ -83,16 +83,16 @@ module Worldize
         departure_airport_index = airport_codes.index(departure_airport)
         arrival_airport_index = airport_codes.index(arrival_airport)
       
-        puts departure_airport
-        puts departure_airport_index
-        puts arrival_airport
-        puts arrival_airport_index
-        puts @airports[departure_airport_index].lon
-        puts @airports[departure_airport_index].lat
+        #puts departure_airport
+        #puts departure_airport_index
+        #puts arrival_airport
+        #puts arrival_airport_index
+        #puts @airports[departure_airport_index].point[0]
+        #puts @airports[departure_airport_index].point[1]
         
-        gc.text(lng2x(@airports[departure_airport_index].lon, width),lat2y(@airports[departure_airport_index].lat, width), @airports[departure_airport_index].code)
-        gc.text(lng2x(@airports[arrival_airport_index].lon, width),lat2y(@airports[arrival_airport_index].lat, width), @airports[arrival_airport_index].code)
-        gc.line(lng2x(@airports[departure_airport_index].lon, width),lat2y(@airports[departure_airport_index].lat, width),lng2x(@airports[arrival_airport_index].lon, width),lat2y(@airports[arrival_airport_index].lat, width))
+        gc.text(lng2x(@airports[departure_airport_index].point[0], width),lat2y(@airports[departure_airport_index].point[1], width), @airports[departure_airport_index].properties.iata_code)
+        gc.text(lng2x(@airports[arrival_airport_index].point[0], width),lat2y(@airports[arrival_airport_index].point[1], width), @airports[arrival_airport_index].properties.iata_code)
+        gc.line(lng2x(@airports[departure_airport_index].point[0], width),lat2y(@airports[departure_airport_index].point[1], width),lng2x(@airports[arrival_airport_index].point[0], width),lat2y(@airports[arrival_airport_index].point[1], width))
       end
       
       gc.draw(img)
@@ -146,7 +146,9 @@ module Worldize
       country
     end
     
-    def parse_airport(airport)          
+    def parse_airport(airport)
+      airport.point = airport.geometry.coordinates
+          
       airport
     end
 

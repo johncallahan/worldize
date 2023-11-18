@@ -74,23 +74,23 @@ module Worldize
         gc.fill(options.fetch(:land))
       end
       
-      puts options
+      #puts options
       
       departure_airport = options.key('DEPART')
       arrival_airport = options.key('ARRIVE')
       departure_airport_index = airport_codes.index(departure_airport)
       arrival_airport_index = airport_codes.index(arrival_airport)
       
-      puts departure_airport
-      puts departure_airport_index
-      puts arrival_airport
-      puts arrival_airport_index
+      #puts departure_airport
+      #puts departure_airport_index
+      #puts arrival_airport
+      #puts arrival_airport_index
       
-      puts @airports[departure_airport_index].point[0]
-      puts @airports[departure_airport_index].point[1]
+      #puts @airports[departure_airport_index].point[0]
+      #puts @airports[departure_airport_index].point[1]
       gc.text(lng2x(@airports[departure_airport_index].point[0], width),lat2y(@airports[departure_airport_index].point[1], width), @airports[departure_airport_index].properties.iata_code)
       gc.text(lng2x(@airports[arrival_airport_index].point[0], width),lat2y(@airports[arrival_airport_index].point[1], width), @airports[arrival_airport_index].properties.iata_code)
-      
+      gc.line(lng2x(@airports[departure_airport_index].point[0], width),lat2y(@airports[departure_airport_index].point[1], width),lng2x(@airports[arrival_airport_index].point[0], width),lat2y(@airports[arrival_airport_index].point[1], width))
       gc.draw(img)
 
       # really meaningful lat: -63..83, everything else is, in fact, poles

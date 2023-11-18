@@ -126,12 +126,8 @@ module Worldize
     end
     
     def parse_airport(airport)
-      airport.point =
-        airport.geometry.coordinates.
-          derp{|points|
-            airport.geometry.type == 'Point' ? points.flatten(1) : points
-          }.map(&:reverse) # GeoJSON has other approach to lat/lng ordering
-
+      airport.point = airport.geometry.coordinates
+          
       airport
     end
 

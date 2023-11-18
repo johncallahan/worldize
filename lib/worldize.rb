@@ -76,6 +76,7 @@ module Worldize
       
       puts @airports[20].point[0]
       puts @airports[20].point[1]
+      gc.fill('red')
       gc.point(@airports[20].point[1],@airports[20].point[0])
 
       gc.draw(img)

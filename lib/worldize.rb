@@ -74,7 +74,8 @@ module Worldize
         gc.fill(options.fetch(:land))
       end
       
-      puts @airports[20]
+      puts @airports[20].point[0]
+      puts @airports[20].point[1]
 
       gc.draw(img)
 

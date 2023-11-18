@@ -76,7 +76,7 @@ module Worldize
       
       puts @airports[20].point[0]
       puts @airports[20].point[1]
-      gc.color_fill(lat2x(@airports[20].point[1], width), lng2x(@airports[20].point[0])
+      gc.color_fill(lat2x(@airports[20].point[1], width), lng2x(@airports[20].point[0]))
       
       gc.draw(img)
 

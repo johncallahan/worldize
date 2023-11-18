@@ -76,6 +76,7 @@ module Worldize
       
       puts options
       
+      puts @airports[1]
       puts @airports[1].point[0]
       puts @airports[1].point[1]
       gc.text(lng2x(@airports[1].point[0], width),lat2y(@airports[1].point[1], width), @airports[1].iata_code)

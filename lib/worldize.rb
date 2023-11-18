@@ -74,9 +74,11 @@ module Worldize
         gc.fill(options.fetch(:land))
       end
       
-      puts @airports[20].point[0]
-      puts @airports[20].point[1]
-      gc.text(lng2x(@airports[20].point[0], width),lat2y(@airports[20].point[1], width), 'HELLO')
+      puts options
+      
+      puts @airports[1].point[0]
+      puts @airports[1].point[1]
+      gc.text(lng2x(@airports[1].point[0], width),lat2y(@airports[1].point[1], width), @airports[1].iata_code)
       
       gc.draw(img)
 

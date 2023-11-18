@@ -76,10 +76,20 @@ module Worldize
       
       puts options
       
-      airport_index = airport_codes.find_index("IAD")
-      puts @airports[airport_index].point[0]
-      puts @airports[airport_index].point[1]
-      gc.text(lng2x(@airports[airport_index].point[0], width),lat2y(@airports[airport_index].point[1], width), @airports[airport_index].properties.iata_code)
+      depature_airport = options.key('DEPART')
+      arrival_airport = options.key('ARRIVE')
+      departure_airport_index = airport_codes.index(departure_airport)
+      arrival_airport_index = airport_codes.index(arrival_airport)
+      
+      puts departure_airport
+      puts departure_airport_index
+      puts arrival_airport
+      puts arrival_airport_index
+      
+      puts @airports[departure_airport_index].point[0]
+      puts @airports[departure_airport_index].point[1]
+      gc.text(lng2x(@airports[departure_airport_index].point[0], width),lat2y(@airports[departure_airport_index].point[1], width), @airports[departure_airport_index].properties.iata_code)
+      gc.text(lng2x(@airports[arrival_airport_index].point[0], width),lat2y(@airports[arrival_airport_index].point[1], width), @airports[arrival_airport_index].properties.iata_code)
       
       gc.draw(img)
 
@@ -88,6 +98,10 @@ module Worldize
       ymax = lat2y(-63, width)
 
       img.crop(0, ymin, width, ymax-ymin, true)
+    end
+    
+    def draw_airports(departure_code,arrival_code, **options)      
+      draw({departure_code => 'DEPART', arrival_code => 'ARRIVE'}.merge(options))
     end
 
     def draw_highlighted(*countries, **options)

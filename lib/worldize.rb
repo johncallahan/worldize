@@ -76,11 +76,10 @@ module Worldize
       
       puts options
       
-      puts @airports[1]
-      puts @airports[1].point[0]
-      puts @airports[1].point[1]
-      #gc.text(lng2x(@airports[1].point[0], width),lat2y(@airports[1].point[1], width), @airports[1].properties.iata_code)
-      gc.point(lng2x(@airports[1].point[0], width),lat2y(@airports[1].point[1], width))
+      airport_index = airport_codes.find_index("IAD")
+      puts @airports[airport_index].point[0]
+      puts @airports[airport_index].point[1]
+      gc.text(lng2x(@airports[airport_index].point[0], width),lat2y(@airports[airport_index].point[1], width), @airports[airport_index].properties.iata_code)
       
       gc.draw(img)
 

@@ -76,7 +76,7 @@ module Worldize
       
       puts options
       
-      depature_airport = options.key('DEPART')
+      departure_airport = options.key('DEPART')
       arrival_airport = options.key('ARRIVE')
       departure_airport_index = airport_codes.index(departure_airport)
       arrival_airport_index = airport_codes.index(arrival_airport)

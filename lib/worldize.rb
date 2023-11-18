@@ -76,9 +76,8 @@ module Worldize
       
       puts @airports[20].point[0]
       puts @airports[20].point[1]
-      gc.fill('red')
-      gc.point(@airports[20].point[1],@airports[20].point[0])
-
+      gc.color_fill(lat2x(@airports[20].point[1], width), lng2x(@airports[20].point[0])
+      
       gc.draw(img)
 
       # really meaningful lat: -63..83, everything else is, in fact, poles

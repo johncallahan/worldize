@@ -74,9 +74,7 @@ module Worldize
         gc.fill(options.fetch(:land))
       end
       
-      countries_airports_and_options.each do |airport|
-        puts @airports[airport]
-      end
+      puts @airports["IAD"]
 
       gc.draw(img)
 

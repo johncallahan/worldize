@@ -45,9 +45,7 @@ module Worldize
       options = DEFAULT_OPTIONS.merge(countries_and_options)
       width = options.fetch(:width)
       
-      img = Image.new(width, width){
-        self.background_color = options.fetch(:ocean)
-      }
+      img = Image.new(width, width) { |opts| opts.background_color = options.fetch(:ocean) }
 
       gc = Magick::Draw.new.
         stroke(options.fetch(:border)).stroke_width(1).

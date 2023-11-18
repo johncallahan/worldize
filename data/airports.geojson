@@ -17,6 +17,20 @@
     },
     {
       "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-81.7599558, 24.5561197] },
+      "properties": {
+        "type": "mid",
+        "name": "Key West",
+        "abbrev": "EYW",
+        "location": "terminal",
+        "gps_code": "KEYW",
+        "iata_code": "EYW",
+        "wikipedia": "https://en.wikipedia.org/wiki/Key_West_International_Airport,
+        "natlscale": 50
+      }
+    },
+    {
+      "type": "Feature",
       "geometry": { "type": "Point", "coordinates": [-78.452778, 38.138611] },
       "properties": {
         "type": "mid",

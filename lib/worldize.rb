@@ -45,6 +45,7 @@ module Worldize
     
     def airport_codes
       @airports.map{|a| a.properties.iata_code}
+    end
 
     def country_names
       @countries.map{|c| c.properties.name}

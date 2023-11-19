@@ -83,12 +83,12 @@ module Worldize
         departure_airport_index = airport_codes.index(departure_airport)
         arrival_airport_index = airport_codes.index(arrival_airport)
       
-        puts departure_airport
-        puts departure_airport_index
-        puts arrival_airport
-        puts arrival_airport_index
-        puts @airports[departure_airport_index].point[0]
-        puts @airports[departure_airport_index].point[1]
+        #puts departure_airport
+        #puts departure_airport_index
+        #puts arrival_airport
+        #puts arrival_airport_index
+        #puts @airports[departure_airport_index].point[0]
+        #puts @airports[departure_airport_index].point[1]
         
         gc.text(lng2x(@airports[departure_airport_index].point[0], width),lat2y(@airports[departure_airport_index].point[1], width), @airports[departure_airport_index].properties.iata_code)
         gc.text(lng2x(@airports[arrival_airport_index].point[0], width),lat2y(@airports[arrival_airport_index].point[1], width), @airports[arrival_airport_index].properties.iata_code)

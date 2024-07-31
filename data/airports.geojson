@@ -3,6 +3,20 @@
   "features": [
     {
       "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-97.03285, 47.92526] },
+      "properties": {
+        "type": "mid",
+        "name": "Grand Forks",
+        "abbrev": "GFK",
+        "location": "terminal",
+        "gps_code": "KGFK",
+        "iata_code": "GFK",
+        "wikipedia": "https://en.wikipedia.org/wiki/Grand_Forks_International_Airport",
+        "natlscale": 50
+      }
+    },
+    {
+      "type": "Feature",
       "geometry": { "type": "Point", "coordinates": [13.003333, 47.794444] },
       "properties": {
         "type": "mid",
